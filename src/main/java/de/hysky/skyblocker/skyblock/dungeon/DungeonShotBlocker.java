@@ -2,6 +2,7 @@ package de.hysky.skyblocker.skyblock.dungeon;
 
 import net.minecraft.client.player.LocalPlayer;
 
+import de.hysky.skyblocker.skyblock.dungeon.puzzle.CreeperBeams;
 import de.hysky.skyblocker.skyblock.dungeon.puzzle.DungeonBlaze;
 
 /**
@@ -13,6 +14,6 @@ public final class DungeonShotBlocker {
 	private DungeonShotBlocker() {}
 
 	public static boolean shouldBlockLeftClick(LocalPlayer player) {
-		return DungeonBlaze.shouldBlockLeftClickShot(player);
+		return DungeonBlaze.shouldBlockLeftClickShot(player) || CreeperBeams.shouldBlockLeftClickShot(player);
 	}
 }

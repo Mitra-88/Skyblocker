@@ -121,6 +121,10 @@ public class DungeonsConfig {
 
 		public boolean creeperSolver = true;
 
+		public boolean creeperOnlyHittingBeams = false;
+
+		public boolean creeperShowOneBeam = false;
+
 		@Deprecated
 		public transient boolean solveWaterboard = true;
 

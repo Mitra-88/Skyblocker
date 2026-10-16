@@ -316,6 +316,22 @@ public class DungeonsCategory {
 								.controller(ConfigUtils.createBooleanController())
 								.build())
 						.option(Option.<Boolean>createBuilder()
+								.name(Component.translatable("skyblocker.config.dungeons.puzzle.creeperOnlyHittingBeams"))
+								.description(Component.translatable("skyblocker.config.dungeons.puzzle.creeperOnlyHittingBeams.@Tooltip"))
+								.binding(defaults.dungeons.puzzleSolvers.creeperOnlyHittingBeams,
+										() -> config.dungeons.puzzleSolvers.creeperOnlyHittingBeams,
+										newValue -> config.dungeons.puzzleSolvers.creeperOnlyHittingBeams = newValue)
+								.controller(ConfigUtils.createBooleanController())
+								.build())
+						.option(Option.<Boolean>createBuilder()
+								.name(Component.translatable("skyblocker.config.dungeons.puzzle.creeperShowOneBeam"))
+								.description(Component.translatable("skyblocker.config.dungeons.puzzle.creeperShowOneBeam.@Tooltip"))
+								.binding(defaults.dungeons.puzzleSolvers.creeperShowOneBeam,
+										() -> config.dungeons.puzzleSolvers.creeperShowOneBeam,
+										newValue -> config.dungeons.puzzleSolvers.creeperShowOneBeam = newValue)
+								.controller(ConfigUtils.createBooleanController())
+								.build())
+						.option(Option.<Boolean>createBuilder()
 								.name(Component.translatable("skyblocker.config.dungeons.puzzle.solveWaterboard"))
 								.description(Component.translatable("skyblocker.config.dungeons.puzzle.solveWaterboard.@Tooltip"))
 								.binding(defaults.dungeons.puzzleSolvers.waterboardOneFlow,
