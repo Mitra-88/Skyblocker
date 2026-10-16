@@ -12,6 +12,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -124,6 +126,26 @@ public class LividColor {
 
 	public static boolean shouldDrawBoundingBox(String name) {
 		return SkyblockerConfigManager.get().dungeons.livid.enableLividColorBoundingBox && color == LIVID_TO_FORMATTING.get(name);
+	}
+
+	/**
+	 * @return true when the given player is one of the fake Livids and not the correct one, so its render can be
+	 *         skipped entirely. Only hides once the correct color is known so the identification phase stays visible.
+	 */
+	public static boolean shouldHideLivid(Player player) {
+		if (!CONFIG.get().hideIncorrectLivids || !correctLividIdFound) return false;
+		if (!(Utils.isInDungeons() && DungeonManager.isInBoss() && DungeonManager.getBoss().isFloor(5))) return false;
+		return LIVID_TO_FORMATTING.containsKey(player.getName().getString()) && player.getId() != correctLividId;
+	}
+
+	/**
+	 * @return true when the given projectile was shot by one of the fake Livids, so the screen isn't flooded with
+	 *         their arrows. Arrows from real players, the correct livid, or with an unresolvable owner stay visible.
+	 */
+	public static boolean shouldHideLividArrow(Projectile projectile) {
+		if (!CONFIG.get().hideIncorrectLivids) return false;
+		if (!(Utils.isInDungeons() && DungeonManager.isInBoss() && DungeonManager.getBoss().isFloor(5))) return false;
+		return projectile.getOwner() instanceof Player player && shouldHideLivid(player);
 	}
 
 	@SuppressWarnings("DataFlowIssue")

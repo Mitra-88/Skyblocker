@@ -333,6 +333,8 @@
   "skyblocker.config.dungeons.livid.enableLividColorTitle.@Tooltip": "Display the Livid color as a title during the boss fight.",
   "skyblocker.config.dungeons.livid.enableSolidColor": "Enable Custom Livid Color",
   "skyblocker.config.dungeons.livid.enableSolidColor.@Tooltip": "Use the custom color instead of the Livid color for glow and bounding box.",
+  "skyblocker.config.dungeons.livid.hideIncorrectLivids": "Only Show Correct Livid",
+  "skyblocker.config.dungeons.livid.hideIncorrectLivids.@Tooltip": "Hides all the fake Livids except the correct one, once the Livid color is known.",
   "skyblocker.config.dungeons.livid.lividColorText": "Livid Color Chat Message",
   "skyblocker.config.dungeons.livid.lividColorText.@Tooltip": "Text for the chat message, the string \"[color]\" will be replaced with the livid color.",
 

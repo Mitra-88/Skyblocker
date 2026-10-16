@@ -18,8 +18,7 @@ import de.hysky.skyblocker.utils.container.SimpleContainerSolver;
 import de.hysky.skyblocker.utils.render.gui.ColorHighlight;
 
 public final class OrderTerminal extends SimpleContainerSolver implements TerminalSolver {
-	// TODO: Change to 10 after the Minister Perk updates is released.
-	private static final int PANES_NUM = 14;
+	private static final int PANES_NUM = 10;
 	private int @Nullable [] orderedSlots;
 	private int currentNum = Integer.MAX_VALUE;
 

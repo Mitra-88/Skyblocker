@@ -449,6 +449,14 @@ public class DungeonsCategory {
 								.controller(ConfigUtils.createBooleanController())
 								.build())
 						.option(Option.<Boolean>createBuilder()
+								.name(Component.translatable("skyblocker.config.dungeons.livid.hideIncorrectLivids"))
+								.description(Component.translatable("skyblocker.config.dungeons.livid.hideIncorrectLivids.@Tooltip"))
+								.binding(defaults.dungeons.livid.hideIncorrectLivids,
+										() -> config.dungeons.livid.hideIncorrectLivids,
+										newValue -> config.dungeons.livid.hideIncorrectLivids = newValue)
+								.controller(ConfigUtils.createBooleanController())
+								.build())
+						.option(Option.<Boolean>createBuilder()
 								.name(Component.translatable("skyblocker.config.dungeons.livid.enableLividColorTitle"))
 								.description(Component.translatable("skyblocker.config.dungeons.livid.enableLividColorTitle.@Tooltip"))
 								.binding(defaults.dungeons.livid.enableLividColorTitle,

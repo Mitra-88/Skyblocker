@@ -160,6 +160,8 @@ public class DungeonsConfig {
 
 		public boolean enableLividColorBoundingBox = true;
 
+		public boolean hideIncorrectLivids = false;
+
 		public boolean enableLividColorText = false;
 
 		public boolean enableLividColorTitle = false;
