@@ -37,6 +37,8 @@ import net.minecraft.world.phys.Vec3;
 import de.hysky.skyblocker.annotations.Init;
 import de.hysky.skyblocker.config.SkyblockerConfigManager;
 import de.hysky.skyblocker.debug.Debug;
+import de.hysky.skyblocker.skyblock.dungeon.secrets.DungeonManager;
+import de.hysky.skyblocker.skyblock.dungeon.secrets.Room;
 import de.hysky.skyblocker.utils.ColorUtils;
 import de.hysky.skyblocker.utils.Utils;
 import de.hysky.skyblocker.utils.render.primitive.PrimitiveCollector;
@@ -78,9 +80,14 @@ public class CreeperBeams extends DungeonPuzzle {
 
 	private static boolean shouldBlockWrongShots() {
 		if (Utils.isBlockerBypassed()) return false;
-		return INSTANCE.shouldSolve()
-				&& SkyblockerConfigManager.get().dungeons.puzzleSolvers.creeperSolver
-				&& SkyblockerConfigManager.get().dungeons.puzzleSolvers.blockIncorrectClicks;
+		if (!INSTANCE.shouldSolve()
+				|| !SkyblockerConfigManager.get().dungeons.puzzleSolvers.creeperSolver
+				|| !SkyblockerConfigManager.get().dungeons.puzzleSolvers.blockIncorrectClicks) {
+			return false;
+		}
+		//shouldSolve and the plan outlive the room, never touch clicks outside the actual room
+		Room room = DungeonManager.getCurrentRoom();
+		return room != null && room.isMatched() && "creeper-room".equals(room.getName());
 	}
 
 	/**
