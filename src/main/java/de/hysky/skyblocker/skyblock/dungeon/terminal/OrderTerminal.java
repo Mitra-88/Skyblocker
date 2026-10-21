@@ -15,9 +15,10 @@ import net.minecraft.world.item.Items;
 import de.hysky.skyblocker.config.SkyblockerConfigManager;
 import de.hysky.skyblocker.utils.container.ContainerSolver;
 import de.hysky.skyblocker.utils.container.SimpleContainerSolver;
+import de.hysky.skyblocker.utils.container.StackDisplayModifier;
 import de.hysky.skyblocker.utils.render.gui.ColorHighlight;
 
-public final class OrderTerminal extends SimpleContainerSolver implements TerminalSolver {
+public final class OrderTerminal extends SimpleContainerSolver implements TerminalSolver, StackDisplayModifier {
 	// TODO: Change to 10 after the Minister Perk updates is released.
 	private static final int PANES_NUM = 14;
 	private int @Nullable [] orderedSlots;
@@ -69,12 +70,22 @@ public final class OrderTerminal extends SimpleContainerSolver implements Termin
 
 	@Override
 	public boolean onClickSlot(int slot, ItemStack stack, int screenId, int button) {
-		if (stack.isEmpty()) return false;
+		//hidden panes come through as an empty stack, clicking one is still a wrong click
+		if (stack.isEmpty()) return shouldBlockIncorrectClicks();
 
 		if (!stack.is(Items.STAINED_GLASS_PANE.red()) || stack.getCount() != currentNum + 1) {
 			return shouldBlockIncorrectClicks();
 		}
 
 		return false;
+	}
+
+	/**
+	 * Only the pane holding the next number stays visible, every other slot of the container renders
+	 * as an empty slot, so the board can't be read ahead of the click that is due.
+	 */
+	@Override
+	public ItemStack modifyDisplayStack(int slotIndex, ItemStack stack) {
+		return stack.is(Items.STAINED_GLASS_PANE.red()) && stack.getCount() == currentNum + 1 ? stack : ItemStack.EMPTY;
 	}
 }
